@@ -1,0 +1,113 @@
+/* 🌟 CONTAINER */
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 16px;
+  }
+  
+  /* 🌟 HEADER */
+  .header {
+    text-align: center;
+    background: linear-gradient(to right, #0066ff, #0033cc);
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+  }
+  
+  .header h2 {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .header p {
+    font-size: 14px;
+    margin-top: 4px;
+    opacity: 0.8;
+  }
+  
+  .header .amount {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 8px;
+    display: block;
+  }
+  
+  /* 🌟 UPI CARD */
+  .upi-card {
+    background: #f6f6f6;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .upi-card .label {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .upi-card .upi {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* 🌟 PARTICIPANTS */
+  .sub-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+  }
+  
+  .participants-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .participant {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .participant-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .split-amount {
+    font-size: 14px;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  /* 🌟 BOTTOM NAVIGATION */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background: white;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px 16px 0 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .nav-item {
+    font-size: 14px;
+    color: #666;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .nav-item:hover {
+    color: #007bff;
+  }
+  

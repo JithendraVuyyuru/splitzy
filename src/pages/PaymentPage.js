@@ -9,20 +9,20 @@ const PaymentPage = () => {
   const amount = queryParams.get("amount") || "0";
   const hostUpiId = queryParams.get("upi") || "";
 
-  // Generate UPI payment link
+  // ✅ Generate UPI Payment Link
   const upiLink = `upi://pay?pa=${hostUpiId}&pn=${encodeURIComponent(participantName)}&am=${amount}&cu=INR`;
 
   return (
-    <div className="p-6 text-center">
-      <h2 className="text-xl font-bold">Payment Details</h2>
-      <p><strong>Name:</strong> {participantName}</p>
-      <p><strong>Amount to Pay:</strong> ₹{amount}</p>
-      <button
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
-        onClick={() => window.location.href = upiLink}
-      >
-        Pay Now
-      </button>
+    <div className="container">
+      <div className="card">
+        <h2 className="text-xl font-bold">Payment Details</h2>
+        <p><strong>Name:</strong> {participantName}</p>
+        <p><strong>Amount to Pay:</strong> ₹{amount}</p>
+        <p><strong>Host UPI ID:</strong> {hostUpiId}</p>
+        <button className="button" onClick={() => window.location.href = upiLink}>
+          Pay Now
+        </button>
+      </div>
     </div>
   );
 };

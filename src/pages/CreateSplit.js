@@ -1,85 +1,73 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";  // ✅ Include Navbar
 
-const CreateSplit = ({ isEditing }) => {
-  const location = useLocation();
+const CreateSplit = () => {
   const navigate = useNavigate();
-
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [participants, setParticipants] = useState("");
   const [hostUpiId, setHostUpiId] = useState("");
-
-  // Load pre-filled data if editing
-  useEffect(() => {
-    if (location.state && isEditing) {
-      setTitle(location.state.title);
-      setAmount(location.state.amount);
-      setParticipants(location.state.participants.join(", "));
-      setHostUpiId(location.state.hostUpiId || "");
-    }
-  }, [location.state, isEditing]);
+  const [participants, setParticipants] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Convert participants to an array
-    const participantList = participants.split(",").map((p) => p.trim());
 
-    // Redirect to Split Details with updated data
-    navigate("/split/1", {
-      state: { title, amount, participants: participantList, hostUpiId },
-    });
+    if (!title || !amount || !hostUpiId || !participants) {
+      alert("❌ Please fill in all fields before proceeding.");
+      return;
+    }
+
+    const participantList = participants.split(",").map((p) => p.trim()).filter((p) => p !== "");
+
+    if (participantList.length === 0) {
+      alert("❌ Please enter at least one participant.");
+      return;
+    }
+
+    const newTransaction = {
+      id: Date.now(),
+      title,
+      amount,
+      hostUpiId,
+      participants: participantList,
+      timestamp: new Date().toLocaleString(),
+    };
+
+    const storedTransactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    storedTransactions.push(newTransaction);
+    localStorage.setItem("transactions", JSON.stringify(storedTransactions));
+
+    navigate("/split-details", { state: newTransaction });
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold">{isEditing ? "Modify Split" : "Create Split"}</h2>
-      <form onSubmit={handleSubmit} className="mt-4">
-        <label className="block">Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border p-2 w-full"
-          required
-        />
+    <div className="container">
+      <Navbar />  {/* ✅ Include Navbar */}
 
-        <label className="block mt-4">Total Amount:</label>
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          className="border p-2 w-full"
-          required
-        />
+      <div className="form-container">
+        <h2>Create Split</h2>
+        <p className="sub-text">Enter details for bill splitting.</p>
 
-        <label className="block mt-4">Your UPI ID:</label>
-        <input
-          type="text"
-          value={hostUpiId}
-          onChange={(e) => setHostUpiId(e.target.value)}
-          className="border p-2 w-full"
-          placeholder="example@upi"
-          required
-        />
+        <form className="card split-form" onSubmit={handleSubmit}>
+          <label>Title</label>
+          <input type="text" className="input-field" placeholder="e.g. Dinner at XYZ"
+            value={title} onChange={(e) => setTitle(e.target.value)} required />
 
-        <label className="block mt-4">Participants (comma-separated):</label>
-        <input
-          type="text"
-          value={participants}
-          onChange={(e) => setParticipants(e.target.value)}
-          className="border p-2 w-full"
-          required
-        />
+          <label>Total Amount</label>
+          <input type="number" className="input-field" placeholder="₹"
+            value={amount} onChange={(e) => setAmount(e.target.value)} required />
 
-        <button
-          type="submit"
-          className="mt-4 bg-green-600 text-white px-4 py-2"
-        >
-          {isEditing ? "Update Split" : "Create Split"}
-        </button>
-      </form>
+          <label>Host UPI ID</label>
+          <input type="text" className="input-field" placeholder="yourupi@upi"
+            value={hostUpiId} onChange={(e) => setHostUpiId(e.target.value)} required />
+
+          <label>Participants (comma-separated)</label>
+          <input type="text" className="input-field" placeholder="Alice, Bob, Charlie"
+            value={participants} onChange={(e) => setParticipants(e.target.value)} required />
+
+          <button type="submit" className="button">Proceed</button>
+        </form>
+      </div>
     </div>
   );
 };
