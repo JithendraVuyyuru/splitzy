@@ -1,42 +1,64 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const SplitDetails = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { title, amount, participants } = location.state || {};
+  const { title, amount, participants, hostUpiId } = location.state || {};
 
-  // Calculate the amount each participant has to pay
+  // Calculate split amount per participant
   const splitAmount = participants?.length ? (amount / participants.length).toFixed(2) : 0;
 
-  // Redirect to Modify Split Page with existing data
-  const handleEdit = () => {
-    navigate("/modify-split", { state: { title, amount, participants } });
+  // Generate sharable payment link for each participant
+  const generateSharableLink = (participantName) => {
+    return `${window.location.origin}/pay?name=${encodeURIComponent(participantName)}&amount=${splitAmount}&upi=${encodeURIComponent(hostUpiId)}`;
+  };
+
+  // ✅ Function to copy link to clipboard (with fallback)
+  const copyToClipboard = async (text) => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        // ✅ Modern way to copy
+        await navigator.clipboard.writeText(text);
+        alert("Payment link copied! Share it with the participant.");
+      } else {
+        // 🔹 Fallback method for unsupported browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        alert("Payment link copied! Share it with the participant.");
+      }
+    } catch (err) {
+      console.error("Copy failed:", err);
+      alert("Failed to copy link. Try manually selecting and copying.");
+    }
   };
 
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold">{title}</h2>
       <p>Total Amount: ₹{amount}</p>
+      <p>Host UPI ID: <strong>{hostUpiId}</strong></p>
       <h3 className="mt-4">Participants:</h3>
       <ul className="list-disc ml-6">
-        {participants?.map((p, index) => (
-          <li key={index}>
-            {p} - <span className="font-semibold">₹{splitAmount}</span>
-          </li>
-        ))}
+        {participants?.map((p, index) => {
+          const paymentLink = generateSharableLink(p);
+          return (
+            <li key={index} className="flex items-center space-x-4">
+              <span>{p} - <strong>₹{splitAmount}</strong></span>
+              {/* ✅ "Copy Payment Link" Button */}
+              <button
+                className="bg-gray-600 text-white px-3 py-1 rounded"
+                onClick={() => copyToClipboard(paymentLink)}
+              >
+                Copy Payment Link
+              </button>
+            </li>
+          );
+        })}
       </ul>
-      <div className="mt-6">
-        <button
-          className="bg-blue-600 text-white px-4 py-2 mr-2"
-          onClick={handleEdit}
-        >
-          Edit
-        </button>
-        <button className="bg-green-600 text-white px-4 py-2">
-          Pay Now
-        </button>
-      </div>
     </div>
   );
 };

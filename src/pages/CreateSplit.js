@@ -8,6 +8,7 @@ const CreateSplit = ({ isEditing }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [participants, setParticipants] = useState("");
+  const [hostUpiId, setHostUpiId] = useState("");
 
   // Load pre-filled data if editing
   useEffect(() => {
@@ -15,6 +16,7 @@ const CreateSplit = ({ isEditing }) => {
       setTitle(location.state.title);
       setAmount(location.state.amount);
       setParticipants(location.state.participants.join(", "));
+      setHostUpiId(location.state.hostUpiId || "");
     }
   }, [location.state, isEditing]);
 
@@ -26,7 +28,7 @@ const CreateSplit = ({ isEditing }) => {
 
     // Redirect to Split Details with updated data
     navigate("/split/1", {
-      state: { title, amount, participants: participantList },
+      state: { title, amount, participants: participantList, hostUpiId },
     });
   };
 
@@ -40,6 +42,7 @@ const CreateSplit = ({ isEditing }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="border p-2 w-full"
+          required
         />
 
         <label className="block mt-4">Total Amount:</label>
@@ -48,6 +51,17 @@ const CreateSplit = ({ isEditing }) => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           className="border p-2 w-full"
+          required
+        />
+
+        <label className="block mt-4">Your UPI ID:</label>
+        <input
+          type="text"
+          value={hostUpiId}
+          onChange={(e) => setHostUpiId(e.target.value)}
+          className="border p-2 w-full"
+          placeholder="example@upi"
+          required
         />
 
         <label className="block mt-4">Participants (comma-separated):</label>
@@ -56,6 +70,7 @@ const CreateSplit = ({ isEditing }) => {
           value={participants}
           onChange={(e) => setParticipants(e.target.value)}
           className="border p-2 w-full"
+          required
         />
 
         <button
