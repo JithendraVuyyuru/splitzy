@@ -1,13 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between">
-      <h1 className="text-xl font-bold">Splitzy</h1>
-      <div>
-        <Link to="/" className="mr-4">Home</Link>
-        <Link to="/create-split">Create Split</Link>
+    <nav className="navbar">
+      <h1 className="logo" onClick={() => navigate("/")}>Splizy</h1>  {/* ✅ Clickable Logo */}
+      <div className="nav-links">
+        <button onClick={() => navigate("/")}>Home</button>
+        <button onClick={() => navigate("/create-split")}>Create Split</button>
+        <button onClick={() => navigate("/split-details")}>Transactions</button>
       </div>
     </nav>
   );
