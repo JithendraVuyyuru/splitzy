@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "52b6d6dfd48b0b22590724695a1a99ca",
+    "revision": "54b821a0b6ffcf40c82547ec8411d1be",
     "url": "/splitzy/index.html"
   },
   {
-    "revision": "58fe8f946702a8723bf4",
+    "revision": "c564ba6042ca9fb76c01",
     "url": "/splitzy/static/css/main.980694f1.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/splitzy/static/js/3.3b68c2b9.chunk.js"
   },
   {
-    "revision": "58fe8f946702a8723bf4",
-    "url": "/splitzy/static/js/main.05bf0179.chunk.js"
+    "revision": "c564ba6042ca9fb76c01",
+    "url": "/splitzy/static/js/main.7248562b.chunk.js"
   },
   {
     "revision": "49e8d453b2ea802da703",
