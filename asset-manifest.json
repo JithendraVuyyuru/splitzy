@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/splitzy/static/css/main.980694f1.chunk.css",
-    "main.js": "/splitzy/static/js/main.bc649ecb.chunk.js",
-    "main.js.map": "/splitzy/static/js/main.bc649ecb.chunk.js.map",
+    "main.js": "/splitzy/static/js/main.b470e9b1.chunk.js",
+    "main.js.map": "/splitzy/static/js/main.b470e9b1.chunk.js.map",
     "runtime-main.js": "/splitzy/static/js/runtime-main.a6b0c79e.js",
     "runtime-main.js.map": "/splitzy/static/js/runtime-main.a6b0c79e.js.map",
     "static/js/2.c85dc8ea.chunk.js": "/splitzy/static/js/2.c85dc8ea.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.3b68c2b9.chunk.js": "/splitzy/static/js/3.3b68c2b9.chunk.js",
     "static/js/3.3b68c2b9.chunk.js.map": "/splitzy/static/js/3.3b68c2b9.chunk.js.map",
     "index.html": "/splitzy/index.html",
-    "precache-manifest.d70587dac75abb3e47c83a8430a7d8b5.js": "/splitzy/precache-manifest.d70587dac75abb3e47c83a8430a7d8b5.js",
+    "precache-manifest.eaafe4e7d5361b69954ac03e241dbf47.js": "/splitzy/precache-manifest.eaafe4e7d5361b69954ac03e241dbf47.js",
     "service-worker.js": "/splitzy/service-worker.js",
     "static/css/main.980694f1.chunk.css.map": "/splitzy/static/css/main.980694f1.chunk.css.map",
     "static/js/2.c85dc8ea.chunk.js.LICENSE.txt": "/splitzy/static/js/2.c85dc8ea.chunk.js.LICENSE.txt"
@@ -19,6 +19,6 @@
     "static/js/runtime-main.a6b0c79e.js",
     "static/js/2.c85dc8ea.chunk.js",
     "static/css/main.980694f1.chunk.css",
-    "static/js/main.bc649ecb.chunk.js"
+    "static/js/main.b470e9b1.chunk.js"
   ]
 }
